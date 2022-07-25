@@ -1,0 +1,75 @@
+<mvc:View controllerName="com.shakib.training.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Page id="page" title="SAP Business Applicstion Studio">
+        <VBox id="main_vbox">
+        <Label id='label1' text="{i18n>title}" />
+        <Input id='input1' value="1000001"/>
+
+        <Label id='label2' text="{i18n>app.firstName}" />
+        <Input id='input2' value='Max'/>
+
+        <Label id='label3' text="{i18n>app.lastName}" />
+        <Input id='input3' value='Mustermann'/>
+
+        <Label id='label4' text="{i18n>app.title}"/>
+        <Input id='input4' value='Dr.'/>
+        <Label id='inputs' text="{i18n>app.gender}"/>
+        <ComboBox
+					id='select'
+                    width="100%"
+                    value="male"
+					>
+					<core:Item key="male" text="Male" />
+                    <core:Item key="female" text="Female" />
+				</ComboBox>
+
+
+        <Label id='label7' text="{i18n>app.email}" />
+        <Input id='input7' value='max.mustermann@clouddna.at'/>
+        <Label id='Gender' text="{i18n>app.phone}" />
+        <Input id='input51' value='+43676123123' />
+
+        <Label id='Website' text="{i18n>app.website}" />
+        <Input id='input15' value='www.clouddna.at' />
+        </VBox>
+
+        <f:SimpleForm id="app_simpleform"
+	editable="true"
+	layout="ResponsiveGridLayout"
+    title="{i18n>title}"
+    labelSpanXL="4"
+    labelSpanL="4"
+    labelSpanM="3"
+    labelSpanS="12"
+    adjustLabelSpan="false"
+    emptySpanXL="4"
+    emptySpanL="4"
+    emptySpanM="4"
+    emptySpanS="0"
+    columnsXL="3"
+    columnsL="3"
+    columnsM="2"
+    singleContainerFullSize="false" >
+    <f:content>
+        <Label id="app_label_customerid" text="{i18n>app.customerid}" 
+               labelFor="app_text_customerid"/>
+        <Text id="app_text_customerid" text="1000001"/>
+
+          <Label id='label22' text="First name (Key)" />
+        <Input id='input22'/>
+
+        <Label id='labe2l3' text="Last Name (Key)" />
+        <Input id='inp2ut3'/>
+
+        <Label id='l2abel4' text="Title" />
+        <Input id='inp2ut4'/>
+        <Label id='inp2uts' text="Gender" />
+        <Input id='in2put5'/>
+
+	</f:content>
+</f:SimpleForm>
+    </Page>
+</mvc:View>
