@@ -1,0 +1,66 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m"
+  xmlns:f="sap.ui.layout.form">
+
+<f:SimpleForm id="app_simpleform"
+	editable="true"
+	layout="ResponsiveGridLayout"
+    title="{i18n>title}"
+    labelSpanXL="4"
+    labelSpanL="4"
+    labelSpanM="3"
+    labelSpanS="12"
+    adjustLabelSpan="false"
+    emptySpanXL="4"
+    emptySpanL="4"
+    emptySpanM="4"
+    emptySpanS="0"
+    columnsXL="3"
+    columnsL="3"
+    columnsM="2"
+    singleContainerFullSize="false" >
+    <f:content>
+            <VBox id="main_vbox">
+        <Label id='label1' text="{i18n>title}" />
+        <Input id='input1' value="{/customerid}"/>
+
+        <Label id='label2' text="{i18n>app.firstName}" />
+        <Input id='input2' value="{/firstname}"/>
+
+        <Label id='label3' text="{i18n>app.lastName}" />
+        <Input id='input3' value="{/lastname}"/>
+
+        <Label id='label4' text="{i18n>app.title}"/>
+        <Input id='input4' value="{/title}" />
+        <Label id='inputs' text="{i18n>app.gender}"/>
+        <ComboBox
+					id='select'
+                    width="100%"
+                    value="male"
+                    items="{gender>/genders}"
+					>
+                    <items>
+					<!-- <core:Item id="_IDGenItem1" key="{gender>}" text="{gender>}" /> -->
+                    
+      <!-- <core:Item key="{gender>}"
+        text="{= ${gender>}==='female' ?${i18n>app.female} : ${i18n>app.male}}"/> -->
+
+       <core:Item id='item' key="{gender>}" text="{path: 'gender>',
+          formatter: '.genderFormatter'}"/>
+
+                    </items>
+				</ComboBox>
+
+
+        <Label id='label7' text="{i18n>app.email}" />
+        <Input id='input7' value="{/email}"/>
+        <Label id='Gender' text="{i18n>app.phone}" />
+        <Input id='input51' value="{/phone}" />
+
+        <Label id='Website' text="{i18n>app.website}" />
+        <Input id='input15' value="{/website}" />
+        </VBox>
+
+	</f:content>
+</f:SimpleForm>
+
+</core:FragmentDefinition>

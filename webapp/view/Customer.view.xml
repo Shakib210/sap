@@ -1,0 +1,39 @@
+<mvc:View controllerName="com.shakib.training.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Page id="page" title="SAP Business Applicstion Studio">
+
+
+
+   <customHeader>
+    <OverflowToolbar id='6'>  
+        <Title id='text' text="{i18n>title}"/>
+        <ToolbarSpacer id='spacer'/>
+        <Button id="app_edit_button" text="{i18n>app.edit}" type="Emphasized"
+                 icon="sap-icon://edit"  visible="{= !${editModel>/editmode}}" press="onEditPressed" />
+    </OverflowToolbar>
+</customHeader>
+
+        <!-- <core:Fragment id="app_change_fragment" 
+     fragmentName="com.shakib.training.view.fragment.ChangeCustomer"
+     type="XML"/> -->
+
+     <core:Fragment id="app_display_fragment"
+      
+     fragmentName="com.shakib.training.view.fragment.DisplayCustomer"
+     type="XML"/>
+
+   <footer>
+    <Bar id='bar'>
+        <contentRight>
+            <Button id="app_save_button" text="{i18n>app.save}" type="Accept"
+                icon="sap-icon://save"  visible="{editModel>/editmode}" press="onSavePressed"/>
+            <Button id="app_cancel_button"  text="{i18n>app.cancel}" type="Reject"
+                icon="sap-icon://cancel" visible="{editModel>/editmode}" press="onCancelPressed"/>
+        </contentRight>
+    </Bar>
+</footer>
+    </Page>
+</mvc:View>
