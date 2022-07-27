@@ -3,61 +3,92 @@
     xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
     xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
     xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://s4dev.virtual:8080/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dev.virtual:8080/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dev.virtual:8080/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dev.virtual:8080/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dev.virtual:8080/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dev.virtual:8080/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dev.virtual:8080/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dev.virtual:8080/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://s4dev.virtual:8080/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
     <edmx:DataServices m:DataServiceVersion="2.0">
-        <Schema Namespace="ZHOUI5_CUSTOMER_SRV" xml:lang="en" sap:schema-version="1"
+        <Schema Namespace="ZHOUI5_CDS" xml:lang="en" sap:schema-version="1"
             xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
             <Annotation Term="Core.SchemaVersion" String="1.0.0"
                 xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
-                <EntityType Name="Customer" sap:content-version="1">
+                <EntityType Name="ZHOUI5_CUSTOMER" sap:label="HOUI5 CDS View" sap:content-version="1">
                     <Key>
                         <PropertyRef Name="CustomerId"/>
                     </Key>
-                    <Property Name="CustomerId" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="UUID" sap:creatable="false" sap:updatable="false"/>
-                    <Property Name="Firstname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="First Name"/>
-                    <Property Name="Lastname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Last Name"/>
-                    <Property Name="AcademicTitle" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Academic Title"/>
-                    <Property Name="Phone" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Telephone"/>
-                    <Property Name="Email" Type="Edm.String" MaxLength="132" sap:unicode="false" sap:label="E-mail" sap:sortable="false" sap:filterable="false"/>
-                    <Property Name="Gender" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Gender" sap:sortable="false" sap:filterable="false"/>
-                    <Property Name="Website" Type="Edm.String" MaxLength="64" sap:unicode="false" sap:label="Website" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
-                    <NavigationProperty Name="Documents" Relationship="ZHOUI5_CUSTOMER_SRV.CustomerDocuments" FromRole="FromRole_CustomerDocuments" ToRole="ToRole_CustomerDocuments"/>
+                    <Property Name="CustomerId" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                    <Property Name="Firstname" Type="Edm.String" MaxLength="40" sap:label="First Name"/>
+                    <Property Name="Lastname" Type="Edm.String" MaxLength="40" sap:label="Last Name"/>
+                    <Property Name="AcademicTitle" Type="Edm.String" MaxLength="20" sap:label="Academic Title" sap:quickinfo="Academic Title: Written Form"/>
+                    <Property Name="Phone" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Telephone" sap:quickinfo="First Telephone No.: Dialing Code + Number"/>
+                    <Property Name="Email" Type="Edm.String" MaxLength="132" sap:display-format="UpperCase" sap:label="E-mail" sap:quickinfo="E-mail address"/>
+                    <Property Name="Gender" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Gender" sap:quickinfo="Gender of business partner"/>
+                    <Property Name="Website" Type="Edm.String" MaxLength="64" sap:label="Website Name" sap:quickinfo="DOD : Website"/>
+                    <Property Name="url" Type="Edm.String" MaxLength="72"/>
+                    <Property Name="mailto" Type="Edm.String" MaxLength="139"/>
                 </EntityType>
-                <EntityType Name="CustomerDocument" m:HasStream="true" sap:content-version="1">
-                    <Key>
-                        <PropertyRef Name="DocId"/>
-                    </Key>
-                    <Property Name="DocId" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="UUID" sap:updatable="false"/>
-                    <Property Name="CustomerId" Type="Edm.Guid" Nullable="false" sap:unicode="false" sap:label="UUID"/>
-                    <Property Name="DocumentName" Type="Edm.String" Nullable="false" MaxLength="257" sap:unicode="false" sap:label="File name"/>
-                    <Property Name="DocumentType" Type="Edm.String" Nullable="false" MaxLength="128" sap:unicode="false" sap:label="MIME Type"/>
-                    <Property Name="Content" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Binary String" sap:sortable="false" sap:filterable="false"/>
-                    <Property Name="CreateTime" Type="Edm.Time" Precision="0" sap:unicode="false" sap:sortable="false" sap:filterable="false"/>
-                    <Property Name="CreateDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:sortable="false" sap:filterable="false"/>
-                    <Property Name="CreatedBy" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:sortable="false" sap:filterable="false"/>
-                </EntityType>
-                <Association Name="CustomerDocuments" sap:content-version="1">
-                    <End Type="ZHOUI5_CUSTOMER_SRV.Customer" Multiplicity="0..1" Role="FromRole_CustomerDocuments"/>
-                    <End Type="ZHOUI5_CUSTOMER_SRV.CustomerDocument" Multiplicity="*" Role="ToRole_CustomerDocuments"/>
-                    <ReferentialConstraint>
-                        <Principal Role="FromRole_CustomerDocuments">
-                            <PropertyRef Name="CustomerId"/>
-                        </Principal>
-                        <Dependent Role="ToRole_CustomerDocuments">
-                            <PropertyRef Name="CustomerId"/>
-                        </Dependent>
-                    </ReferentialConstraint>
-                </Association>
-                <EntityContainer Name="ZHOUI5_CUSTOMER_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
-                    <EntitySet Name="CustomerSet" EntityType="ZHOUI5_CUSTOMER_SRV.Customer" sap:pageable="false" sap:content-version="1"/>
-                    <EntitySet Name="CustomerDocumentSet" EntityType="ZHOUI5_CUSTOMER_SRV.CustomerDocument" sap:pageable="false" sap:content-version="1"/>
-                    <AssociationSet Name="CustomerDocumentsSet" Association="ZHOUI5_CUSTOMER_SRV.CustomerDocuments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                        <End EntitySet="CustomerSet" Role="FromRole_CustomerDocuments"/>
-                        <End EntitySet="CustomerDocumentSet" Role="ToRole_CustomerDocuments"/>
-                    </AssociationSet>
+                <EntityContainer Name="ZHOUI5_CDS_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                    <EntitySet Name="ZHOUI5_CUSTOMERSET" EntityType="ZHOUI5_CDS.ZHOUI5_CUSTOMER" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
                 </EntityContainer>
-                <atom:link rel="self" href="https://s4dev.virtual:8080/sap/opu/odata/sap/ZHOUI5_CUSTOMER_SRV/$metadata"
+                <Annotations Target="ZHOUI5_CDS.ZHOUI5_CDS_Entities"
+                    xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                    <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                    <Annotation Term="Aggregation.ApplySupported">
+                        <Record>
+                            <PropertyValue Property="Transformations">
+                                <Collection>
+                                    <String>aggregate</String>
+                                    <String>groupby</String>
+                                    <String>filter</String>
+                                </Collection>
+                            </PropertyValue>
+                            <PropertyValue Property="Rollup" EnumMember="None"/>
+                        </Record>
+                    </Annotation>
+                </Annotations>
+                <Annotations Target="ZHOUI5_CDS.ZHOUI5_CUSTOMER"
+                    xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                    <Annotation Term="Common.SemanticKey">
+                        <Collection>
+                            <PropertyPath>CustomerId</PropertyPath>
+                        </Collection>
+                    </Annotation>
+                </Annotations>
+                <atom:link rel="self" href="https://s4dev.virtual:8080/sap/opu/odata/sap/ZHOUI5_CDS/$metadata"
                     xmlns:atom="http://www.w3.org/2005/Atom"/>
-                    <atom:link rel="latest-version" href="https://s4dev.virtual:8080/sap/opu/odata/sap/ZHOUI5_CUSTOMER_SRV/$metadata"
+                    <atom:link rel="latest-version" href="https://s4dev.virtual:8080/sap/opu/odata/sap/ZHOUI5_CDS/$metadata"
                         xmlns:atom="http://www.w3.org/2005/Atom"/>
                     </Schema>
                 </edmx:DataServices>

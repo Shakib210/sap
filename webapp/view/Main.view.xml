@@ -4,10 +4,89 @@
     xmlns:core="sap.ui.core"
     xmlns:f="sap.ui.layout.form"
     displayBlock="true"
+     xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns="sap.m">
         <Page id="page" title="Table">
-            <content>
+        <content>
+         <smartFilterBar:SmartFilterBar id="main_smartfilter"
+                entitySet="ZHOUI5_CUSTOMERSET" />
+
+            <!-- <smartTable:SmartTable id="main_smarttable"
+    entitySet="ZHOUI5_CUSTOMERSET"
+    tableType="ResponsiveTable"
+    useExportToExcel="true"
+    useVariantManagement="false"
+    useTablePersonalisation="true"
+    header="{i18n>main.table.title}"
+    showRowCount="true"
+    enableAutoBinding="true">
+
+    <Table id="main_table">
+        <columns>
+            <Column id='col'>
+                <customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey": 
+                             "main_delete_column", "columnIndex": "99"}' />
+                </customData>
+                <Text id='del' text="{i18n>delete}" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem id='item' type="Navigation" press="onListItemPressed">
+                <cells>
+                    <Button id='btn' icon="sap-icon://delete" type="Reject" 
+                            press="onDeleteButtonPressed" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+</smartTable:SmartTable> -->
+
+<smartTable:SmartTable id="main_smarttable"
+    entitySet="ZHOUI5_CUSTOMERSET"
+    tableType="ResponsiveTable"
+    useExportToExcel="true"
+    useVariantManagement="false"
+    useTablePersonalisation="true"
+    header="{i18n>main.table.title}"
+    showRowCount="true"
+    enableAutoBinding="true">
+
+    <Table id="main_table">
+        <columns>
+            <Column id='col'>
+                <customData>
+                    <core:CustomData key="p13nData" value='\{"columnKey": 
+                             "main_delete_column", "columnIndex": "99"}' />
+                </customData>
+                <Text id='textD' text="{i18n>delete}" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem id='item' type="Navigation" press="onListItemPressed">
+                <cells>
+                    <Button id='btn' icon="sap-icon://delete" type="Reject" 
+                            press="onDeleteButtonPressed" />
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+</smartTable:SmartTable>
+
+        </content>
+            <!-- <content>
                 <Table id="main_table" headerText="Customer" items="{/CustomerSet}" >
+                <headerToolbar>
+    <OverflowToolbar id="_IDGenOverflowToolbar1">
+        <Title id="_IDGenTitle1" text="{i18n>main.table.title}"/>
+        <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+        <Button id="main_button_create" icon="sap-icon://add" 
+           type="Accept" text="{i18n>app.create}" press="onCreatePressed"/>
+    </OverflowToolbar>
+</headerToolbar>
                     <columns>
 <Column id="main_column_customerid">
     <Text id="main_text_customerid" text="{i18n>app.customerid}"/>
@@ -43,19 +122,19 @@
                    <ColumnListItem id='id' type="Navigation" 
      press="onListItemPressed">
     <cells>
-        <ObjectIdentifier title="{CustomerId}"/>
-        <Text text="{Firstname}"/>
-        <Text text="{Lastname}"/>
-        <Text text="{AcademicTitle}"/>
-        <Text text="{= ${Gender} === '1' ? ${i18n>female} : ${i18n>male} }"/>
-        <Text text="{Email}"/>
-        <Text text="{Phone}"/>
-        <Link text="{Website}" href="https://{website}" target="_blank"/>
-        <Button icon="sap-icon://delete" type="Reject" press="onDeleteButtonPressed"/>
+        <ObjectIdentifier id='1' title="{CustomerId}"/>
+        <Text id='fName' text="{Firstname}"/>
+        <Text id='Lname' text="{Lastname}"/>
+        <Text id='at' text="{AcademicTitle}"/>
+        <Text id='gender' text="{= ${Gender} === '1' ? ${i18n>female} : ${i18n>male} }"/>
+        <Text id='email' text="{Email}"/>
+        <Text id='phone' text="{Phone}"/>
+        <Link id='website' text="{Website}" href="https://{website}" target="_blank"/>
+        <Button id='btn' icon="sap-icon://delete" type="Reject" press="onDeleteButtonPressed"/>
     </cells>
 </ColumnListItem>
                     </items>
                 </Table>
-            </content>
+            </content> -->
         </Page>
 </mvc:View>

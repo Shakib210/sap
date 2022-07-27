@@ -23,7 +23,26 @@
           "odataVersion": "2.0",
           "localUri": "localService/metadata.xml"
         }
-      }
+      },
+      "ZHOUI5_CDS": {
+        "uri": "/sap/opu/odata/sap/ZHOUI5_CDS/",
+        "type": "OData",
+        "settings": {
+            "odataVersion": "2.0",
+            "annotations": [
+                "ZHOUI5_CDS_VAN",
+                "annotation"
+            ],
+            "localUri": "localService/metadata.xml"
+        }
+    },
+    "ZHOUI5_CDS_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZHOUI5_CDS_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+            "localUri": "localService/ZHOUI5_CDS_VAN.xml"
+        }
+    }
     }
   },
   "sap.ui": {
@@ -72,11 +91,21 @@
         "dataSource": "ZHOUI5_CUSTOMER_SRV",
         "preload": true,
         "settings": {
-          "defaultBindingMode": "TwoWay",
-          "defaultCountMode": "Inline",
-          "refreshAfterChange": false
+            "defaultBindingMode": "TwoWay",
+            "defaultCountMode": "Inline",
+            "refreshAfterChange": true,
+            "useBatch": true,
+            "tokenHandling": true
         }
-      },
+    },
+    "cdsModel": {
+        "dataSource": "ZHOUI5_CDS",
+        "preload": true,
+        "settings": {
+            "defaultBindingMode": "TwoWay",
+            "defaultCountMode": "Inline"
+        }
+    },
       "gender": {
         "type": "sap.ui.model.json.JSONModel",
         "uri": "data/genders.json"
@@ -112,12 +141,19 @@
           ]
         },
         {
-            "name": "Customer",
-            "pattern": "customer/{path}",
-            "target": [
-              "Customer"
-            ]
-          }
+          "name": "Customer",
+          "pattern": "customer/{path}",
+          "target": [
+            "Customer"
+          ]
+        },
+        {
+          "name": "CreateCustomer",
+          "pattern": "createcustomer",
+          "target": [
+            "Customer"
+          ]
+        }
       ],
       "targets": {
         "Main": {
@@ -127,7 +163,7 @@
           "viewId": "Main",
           "viewName": "Main"
         },
-        "Customer":{
+        "Customer": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
