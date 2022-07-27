@@ -7,7 +7,7 @@
     xmlns="sap.m">
         <Page id="page" title="Table">
             <content>
-                <Table id="main_table" headerText="Customer" items="{customers}">
+                <Table id="main_table" headerText="Customer" items="{/CustomerSet}" >
                     <columns>
 <Column id="main_column_customerid">
     <Text id="main_text_customerid" text="{i18n>app.customerid}"/>
@@ -33,18 +33,25 @@
 <Column id="main_column_website" minScreenWidth="Desktop">
     <Text id="main_text_website" text="{i18n>app.website}"/>
 </Column>
+
+<Column id="main_column_delete">
+  <Text id="main_text_delete" text="{i18n>delete}"/>
+</Column>
+
                     </columns>
                     <items>
-                    <ColumnListItem>
+                   <ColumnListItem id='id' type="Navigation" 
+     press="onListItemPressed">
     <cells>
-      <ObjectIdentifier title="{customerList>customerid}"/>
-      <Text text="{customerList>firstname}"/>
-      <Text text="{customerList>lastname}"/>
-      <Text text="{customerList>title}"/>
-      <Text text="{= ${customerList>gender} === 'female' ? ${i18n>female} : ${i18n>male} }"/>
-      <Text text="{customerList>email}"/>
-      <Text text="{customerList>phone}"/>
-      <Link text="{customerList>website}" href="https://{website}" target="_blank"/>
+        <ObjectIdentifier title="{CustomerId}"/>
+        <Text text="{Firstname}"/>
+        <Text text="{Lastname}"/>
+        <Text text="{AcademicTitle}"/>
+        <Text text="{= ${Gender} === '1' ? ${i18n>female} : ${i18n>male} }"/>
+        <Text text="{Email}"/>
+        <Text text="{Phone}"/>
+        <Link text="{Website}" href="https://{website}" target="_blank"/>
+        <Button icon="sap-icon://delete" type="Reject" press="onDeleteButtonPressed"/>
     </cells>
 </ColumnListItem>
                     </items>

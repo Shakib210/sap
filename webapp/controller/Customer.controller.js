@@ -2,12 +2,13 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageBox",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "sap/ui/core/routing/History"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,MessageBox, JSONModel,Fragment ) {
+    function (Controller,MessageBox, JSONModel,Fragment, History ) {
         "use strict";
 
         return Controller.extend("com.shakib.training.controller.Main", {
@@ -16,8 +17,11 @@ sap.ui.define([
                 let oEditModel = new JSONModel({
                     editmode: false
                 });
-            
                 this.getView().setModel(oEditModel, "editModel");
+                this._showCustomerFragment("DisplayCustomer");
+            
+                this.getOwnerComponent().getRouter().getRoute("Customer")
+                    .attachPatternMatched(this._onPatternMatched, this);
             },
         
             // onExit:function(){
@@ -31,6 +35,25 @@ sap.ui.define([
             // onAfterRendering:function(){
 
             // }
+
+            _onPatternMatched:function (oEvent) {
+                console.log('oEvent', oEvent)
+                let sPath = oEvent.getParameters().arguments.path;
+                this.sCustomerPath = "/" + sPath;
+                this.getView().bindElement(this.sCustomerPath);
+            },
+            
+            onNavBack:function(){
+                var oHistory = History.getInstance();
+                var sPreviousHash = oHistory.getPreviousHash();
+            
+                if (sPreviousHash !== undefined) {
+                    window.history.go(-1);
+                } else {
+                    var oRouter = this.getOwnerComponent().getRouter();
+                    oRouter.navTo("Main");
+                }
+            },
 
             onEditPressed:function(){
                 console.log('pressed')
