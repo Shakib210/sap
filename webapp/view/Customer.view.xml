@@ -29,6 +29,12 @@
 
    <footer>
     <Bar id='bar'>
+    <contentLeft>
+    <Button id="customer_button_attachments" text="{i18n>attachments}"
+        visible="{= !${editModel>/editmode} }" icon="sap-icon://attachment"
+        press=".onOpenAttachments"/>
+</contentLeft>
+
         <contentRight>
             <Button id="app_save_button" text="{i18n>app.save}" type="Accept"
                 icon="sap-icon://save"  visible="{editModel>/editmode}" press="onSavePressed"/>

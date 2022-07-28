@@ -14,10 +14,10 @@ sap.ui.define(
 
     return BaseController.extend("com.shakib.training.controller.Main", {
       onInit: function () {
-          this.setContentDensity()
+        this.setContentDensity();
 
-          this.getView().setModel(this.getOwnerComponent().getModel('cdsModel'));
-    this.getView().byId("main_smarttable").rebindTable();
+        this.getView().setModel(this.getOwnerComponent().getModel("cdsModel"));
+        this.getView().byId("main_smarttable").rebindTable();
 
         let oEditModel = new JSONModel({
           editmode: false,
@@ -41,45 +41,47 @@ sap.ui.define(
       },
 
       //normal table
-    //   _delete: function (oListItem) {
-    //     let oModel = this.getModel();
-    //     let oResourceBundle = this.getView()
-    //       .getModel("i18n")
-    //       .getResourceBundle();
-    //     let sPath = oListItem.getBindingContext().getPath();
+      //   _delete: function (oListItem) {
+      //     let oModel = this.getModel();
+      //     let oResourceBundle = this.getView()
+      //       .getModel("i18n")
+      //       .getResourceBundle();
+      //     let sPath = oListItem.getBindingContext().getPath();
 
-    //     MessageBox.warning(oResourceBundle.getText("sureToDeleteQuestion"), {
-    //       title: oResourceBundle.getText("sureToDeleteTitle"),
-    //       actions: [MessageBox.Action.YES, MessageBox.Action.NO],
-    //       emphasizedAction: MessageBox.Action.YES,
-    //       onClose: function (oAction) {
-    //         if (MessageBox.Action.YES === oAction) {
-    //           oModel.remove(sPath);
-    //         }
-    //       },
-    //     });
-    //   },
+      //     MessageBox.warning(oResourceBundle.getText("sureToDeleteQuestion"), {
+      //       title: oResourceBundle.getText("sureToDeleteTitle"),
+      //       actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+      //       emphasizedAction: MessageBox.Action.YES,
+      //       onClose: function (oAction) {
+      //         if (MessageBox.Action.YES === oAction) {
+      //           oModel.remove(sPath);
+      //         }
+      //       },
+      //     });
+      //   },
 
-    //   onListItemPressed: function (oEvent) {
-    //     console.log("test");
-    //     let sPath = oEvent.getSource().getBindingContext().getPath();
-    //     let oRouter = this.getRouter();
-    //     oRouter.navTo("Customer", {
-    //       path: sPath.split("/")[1],
-    //     });
-    //   },
+      //   onListItemPressed: function (oEvent) {
+      //     console.log("test");
+      //     let sPath = oEvent.getSource().getBindingContext().getPath();
+      //     let oRouter = this.getRouter();
+      //     oRouter.navTo("Customer", {
+      //       path: sPath.split("/")[1],
+      //     });
+      //   },
 
-    onListItemPressed: function(oEvent){
+      onListItemPressed: function (oEvent) {
         //let sPath = oEvent.getSource().getBindingContext().getPath();
         //let oRouter = this.getOwnerComponent().getRouter();
-        let sGuid = oEvent.getSource().getBindingContext().getPath().split("'")[1];
+        let sGuid = oEvent
+          .getSource()
+          .getBindingContext()
+          .getPath()
+          .split("'")[1];
         this.getRouter().navTo("Customer", {
-            //path: sPath.split("/")[1]
-            path: sGuid
+          //path: sPath.split("/")[1]
+          path: sGuid,
         });
-    },
-
-    
+      },
 
       onDeleteButtonPressed: function (oEvent) {
         let oModel = this.getModel();
@@ -111,37 +113,38 @@ sap.ui.define(
       },
 
       //smart table
-      _delete: function(oListItem){
+      _delete: function (oListItem) {
         //let oModel = this.getModel();
         //let oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
         //let sPath = oListItem.getBindingContext().getPath();
-        
+
         let oModel = this.getOwnerComponent().getModel();
         let sGuid = oListItem.getBindingContext().getPath().split("'")[1];
         let sPath = oModel.createKey("/CustomerSet", {
-            CustomerId: sGuid
+          CustomerId: sGuid,
         });
-    
+
         MessageBox.warning(this.getLocalizedText("sureToDeleteQuestion"), {
-            title: this.getLocalizedText("sureToDeleteTitle"),
-            actions: [MessageBox.Action.YES, MessageBox.Action.NO],
-            emphasizedAction: MessageBox.Action.YES,
-            onClose: function(oAction){
-                if(MessageBox.Action.YES === oAction){
-                    oModel.remove(sPath, {
-                        success: (oData, response) => {
-                            MessageBox.success(this.
-                                 getLocalizedText("dialog.delete.success"));
-                            this.getModel().refresh();
-                        },
-                        error: (oError) => {
-                            MessageBox.error(oError.message);
-                        }
-                    });
-                }
-            }.bind(this)
+          title: this.getLocalizedText("sureToDeleteTitle"),
+          actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+          emphasizedAction: MessageBox.Action.YES,
+          onClose: function (oAction) {
+            if (MessageBox.Action.YES === oAction) {
+              oModel.remove(sPath, {
+                success: (oData, response) => {
+                  MessageBox.success(
+                    this.getLocalizedText("dialog.delete.success")
+                  );
+                  this.getModel().refresh();
+                },
+                error: (oError) => {
+                  MessageBox.error(oError.message);
+                },
+              });
+            }
+          }.bind(this),
         });
-    },
+      },
 
       onCreatePressed: function () {
         console.log("create pressed");

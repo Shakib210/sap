@@ -6,6 +6,7 @@ sap.ui.define(
     "sap/ui/core/Fragment",
     "sap/ui/core/routing/History",
     "com/shakib/training/controller/formatter/HOUI5Formatter",
+    "sap/ui/core/Item"
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} BaseController
@@ -16,7 +17,8 @@ sap.ui.define(
     JSONModel,
     Fragment,
     History,
-    HOUI5Formatter
+    HOUI5Formatter,
+    Item
   ) {
     "use strict";
 
@@ -25,7 +27,7 @@ sap.ui.define(
       _fragmentList: {},
       bCreate: false,
 
-      onInit: function () {
+      onInit:function () {
         let oEditModel = new JSONModel({
           editmode: false,
         });
@@ -67,6 +69,49 @@ sap.ui.define(
     //     this._showCustomerFragment("DisplayCustomer");
     //   },
 
+
+    onAfterItemAdded:function(oEvent){
+        let oUploadSet = this.getView().byId("attachments_uploadset");
+        let oUploadSetItem = oEvent.getParameters().item;
+        let sFileName = oUploadSetItem.getFileName();
+    
+        oUploadSet.removeAllHeaderFields();
+    
+        let oHeader = new Item({
+            key: "x-csrf-token",
+            text: this.getView().getModel().getSecurityToken()
+        });
+        oUploadSet.addHeaderField(oHeader);
+    
+        oHeader = new Item({
+            key: "slug",
+            text: sFileName
+        });
+        oUploadSet.addHeaderField(oHeader);
+    },
+    
+    formatUrl:function(sDocId){
+        let sPath = this.getView().getModel().createKey("/CustomerDocumentSet", {
+            DocId: sDocId
+        });
+        return this.getView().getModel().sServiceUrl + sPath + "/$value";
+    },
+
+    onUploadCompleted:function(){
+        this.getView().getModel().refresh(true);
+    },
+    
+    onRemovePressed:function(oEvent){
+        oEvent.preventDefault();
+        let sPath = oEvent.getSource().getBindingContext().getPath();
+        this.getView().getModel().remove(sPath);
+    },
+    
+    onAttachmentsDialogClose:function(){
+        this._pDialog.then(function(oDialog){
+            oDialog.close();
+        }.bind(this));
+    },
 
     //smart table
     _onPatternMatched: function (oEvent) {
@@ -198,6 +243,30 @@ sap.ui.define(
           }
         });
       },
+
+      onOpenAttachments: function() {
+        let oView = this.getView();
+    
+        if (!this._pDialog) {
+            this._pDialog = Fragment.load({
+                id: oView.getId(),
+                name: "com.shakib.training.view.fragment.AttachmentDialog",
+                controller: this
+            }).then(function (oDialog) {
+                oView.addDependent(oDialog);
+                return oDialog;
+            });
+        }
+    
+        this._pDialog.then(function (oDialog) {
+            let oUploadSet = this.getView().byId("attachments_uploadset");
+            oUploadSet.setUploadUrl(this.getView().getModel().sServiceUrl + 
+               this.getView().getElementBinding().getPath() + "/Documents");
+            oDialog.open();
+        }.bind(this));
+    },
+    
+    
     });
   }
 );
